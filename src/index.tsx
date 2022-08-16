@@ -1,3 +1,3 @@
-import { App } from './App';
+import Tafqit from './Tafqit';
 
-export { App };
+export default Tafqit;
