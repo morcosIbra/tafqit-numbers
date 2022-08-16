@@ -78,4 +78,5 @@ export const getTripletFormat = (
   return `${formatsAppended}${formatsAppended ? ' ' : ''}${tripletUnitFormat}`;
 };
 
-export const getFinalTafqitFormat = (tafqitMap: string[]): string => `${only} ${tafqitMap.join(` ${and}`)} ${noMore}`;
+export const getFinalTafqitFormat = (tafqitMap: string[], currencyFormat: string): string =>
+  `${only} ${tafqitMap.join(` ${and}`)} ${currencyFormat} ${noMore}`;

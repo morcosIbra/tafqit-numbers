@@ -13,6 +13,7 @@ const getTafqitFormat = (num: string): string => {
 
   const reversedNum = [...`${num}`].reverse();
   const tafqitMap = [];
+  let currencyFormat = '';
   for (let tripletOrder = 0; tripletOrder < reversedNum.length; tripletOrder += 3) {
     const [firstDigit, secondDigit, thirdDigit]: number[] = [
       parseInt(reversedNum[tripletOrder]),
@@ -27,12 +28,13 @@ const getTafqitFormat = (num: string): string => {
     const secondDigitFormat = getSecondDigitFormat(secondDigit, firstDigit);
     const thirdDigitFormat = getThirdDigitFormat(thirdDigit);
 
-    tripletUnitFormat = getUnitFormat(tripletAmount, tripletOrder);
+    if (tripletOrder === 0) currencyFormat = getUnitFormat(tripletAmount, tripletOrder);
+    else tripletUnitFormat = getUnitFormat(tripletAmount, tripletOrder);
 
     const tripletFormat = getTripletFormat(tripletUnitFormat, firstDigitFormat, secondDigitFormat, thirdDigitFormat);
     if (tripletFormat) tafqitMap.unshift(tripletFormat);
   }
-  return getFinalTafqitFormat(tafqitMap);
+  return getFinalTafqitFormat(tafqitMap, currencyFormat);
 };
 
 export default getTafqitFormat;
