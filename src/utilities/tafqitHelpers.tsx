@@ -12,7 +12,19 @@ import {
   noMore,
 } from '../localisation';
 
-export const maxNumLen = 9;
+export const notValidNum = (num: string) => {
+  if (num === '' || num.length > 9) return true;
+  const checkNum = Number(num);
+  return checkNum !== parseInt(num, 10) || checkNum < 1 || !Number.isInteger(checkNum);
+};
+
+export const getTripletAmount = (firstDigit: number, secondDigit: number, thirdDigit: number) =>
+  parseInt(
+    [firstDigit, secondDigit, thirdDigit].reduce(
+      (total, digit) => (Number.isNaN(digit) ? total : `${digit}${total}`),
+      '',
+    ),
+  );
 
 export const getFirstDigitFormat = (
   digit: number,
@@ -30,7 +42,7 @@ export const getFirstDigitFormat = (
   return `${originNums[digit]}${firstDigitPrefix}`;
 };
 
-export const getSecondDigitFormat = (digit: string, refDigit: string): string => {
+export const getSecondDigitFormat = (digit: number, refDigit: number): string => {
   if (digit)
     return secondtoRefOverride[digit]
       ? secondtoRefOverride[digit][refDigit] || secondtoRefOverride[digit].default
@@ -39,7 +51,7 @@ export const getSecondDigitFormat = (digit: string, refDigit: string): string =>
   return '';
 };
 
-export const getThirdDigitFormat = (digit: string): string => {
+export const getThirdDigitFormat = (digit: number): string => {
   if (digit)
     return thirdDigitOverride[digit] ? thirdDigitOverride[digit].default : `${originNums[digit]}${thirdDigitPrefix}`;
 
@@ -54,21 +66,16 @@ export const getUnitFormat = (tripletAmount: number, tripletOrder: number): stri
 };
 
 export const getTripletFormat = (
-  secondDigit: number,
   tripletUnitFormat: string,
   firstDigitFormat: string,
   secondDigitFormat: string,
   thirdDigitFormat: string,
 ): string => {
-  const secondAnd = firstDigitFormat && secondDigitFormat && secondDigit !== 1 ? and : '';
-  const thirdAnd = thirdDigitFormat && (firstDigitFormat || secondDigitFormat) && and;
+  const formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat]
+    .filter((format) => !!format)
+    .join(` ${and}`);
 
-  return `${appendDigitFormat(thirdDigitFormat)}${thirdAnd}${appendDigitFormat(
-    firstDigitFormat,
-  )}${secondAnd}${appendDigitFormat(secondDigitFormat)}${tripletUnitFormat}`;
+  return `${formatsAppended}${formatsAppended ? ' ' : ''}${tripletUnitFormat}`;
 };
 
-const appendDigitFormat = (digitFormat: string): string => (digitFormat ? `${digitFormat} ` : '');
-
-export const getFinalTafqitFormat = (tafqitMap: string[], currencyFormat: string): string =>
-  `${only} ${tafqitMap.join(` ${and}`)}${currencyFormat} ${noMore}`;
+export const getFinalTafqitFormat = (tafqitMap: string[]): string => `${only} ${tafqitMap.join(` ${and}`)} ${noMore}`;
