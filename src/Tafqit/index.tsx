@@ -8,6 +8,6 @@ type Props = {
 const Tafqit = ({ children }: Props) => {
   const tafqitFormat = getTafqitFormat(children);
 
-  return <p>{tafqitFormat}</p>;
+  return <p data-testid='tafqit-value'>{tafqitFormat}</p>;
 };
 export default Tafqit;
