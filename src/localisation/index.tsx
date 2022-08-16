@@ -1,4 +1,4 @@
-import { OriginNums, RefOverride, TripletUnitMap } from './localisation.types';
+import { OriginNums, RefOverride, FirstRefOverride, TripletUnitMap } from './localisation.types';
 
 export const firstDigitPrefix = 'ة';
 export const secondDigitPrefix = 'ون';
@@ -19,21 +19,24 @@ export const originNums: OriginNums = {
   9: 'تسع',
 };
 
-export const firstToRefOverride: RefOverride = {
+export const firstToRefOverride: FirstRefOverride = {
   0: {
     default: '',
-    notExist: 'صفر',
+    onlyDigit: '',
   },
   1: {
     1: 'احدي',
     default: 'واحد',
+    onlyDigit: '',
   },
   2: {
     1: 'اثنا',
     default: 'اثنان',
+    onlyDigit: '',
   },
   8: {
     default: 'ثمانية',
+    onlyDigit: 'ثمانية',
   },
 };
 

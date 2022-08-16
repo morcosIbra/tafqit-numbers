@@ -14,13 +14,19 @@ import {
 
 export const maxNumLen = 9;
 
-export const getFirstDigitFormat = (digit: string, refDigit: string): string => {
+export const getFirstDigitFormat = (
+  digit: number,
+  secondDigit: number,
+  thirdDigit: number,
+  tripletOrder: number,
+): string => {
   if (firstToRefOverride[digit]) {
-    return !refDigit
-      ? firstToRefOverride[digit].notExist || ''
-      : firstToRefOverride[digit][refDigit] || firstToRefOverride[digit].default;
-  }
+    if (tripletOrder !== 0 && !secondDigit && !thirdDigit) return firstToRefOverride[digit].onlyDigit;
 
+    return firstToRefOverride[digit][secondDigit]
+      ? firstToRefOverride[digit][secondDigit]
+      : firstToRefOverride[digit].default;
+  }
   return `${originNums[digit]}${firstDigitPrefix}`;
 };
 

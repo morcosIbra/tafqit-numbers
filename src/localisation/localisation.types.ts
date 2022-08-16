@@ -9,6 +9,14 @@ export interface RefOverride {
   };
 }
 
+export interface FirstRefOverride {
+  [key: string]: {
+    default: string;
+    onlyDigit: string;
+    [key: string]: string;
+  };
+}
+
 export interface TripletUnitMap {
   [key: string]: {
     muthana: string;
