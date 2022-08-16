@@ -65,4 +65,4 @@ export const getTripletFormat = (
 const appendDigitFormat = (digitFormat: string): string => (digitFormat ? `${digitFormat} ` : '');
 
 export const getFinalTafqitFormat = (tafqitMap: string[], currencyFormat: string): string =>
-  `${only} ${tafqitMap.join(` ${and}`)} ${currencyFormat} ${noMore}`;
+  `${only} ${tafqitMap.join(` ${and}`)}${currencyFormat} ${noMore}`;
