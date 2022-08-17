@@ -80,7 +80,7 @@ export const getTripletFormat = (
   }, '');
   formatsAppended = formatsAppended.trim();
 
-  return `${formatsAppended}${tripletUnitFormat ? ' ' : ''}${tripletUnitFormat}`;
+  return `${formatsAppended}${tripletUnitFormat && formatsAppended ? ' ' : ''}${tripletUnitFormat}`;
 };
 
 export const getFinalTafqitFormat = (tafqitMap: string[], currencyFormat: string): string =>
