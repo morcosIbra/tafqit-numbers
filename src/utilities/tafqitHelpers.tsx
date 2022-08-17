@@ -73,12 +73,13 @@ export const getTripletFormat = (
   thirdDigitFormat: string,
   secondDigit: number,
 ): string => {
-  let formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat].reduce((finalFormat, format, index) => {
-    if (!format) return finalFormat;
-    if (!finalFormat || (index === 2 && secondDigit === 1 && firstDigitFormat)) return `${finalFormat} ${format}`;
-    return `${finalFormat} ${and}${format}`;
-  }, '');
-  formatsAppended = formatsAppended.trim();
+  const formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat]
+    .reduce((finalFormat, format, index) => {
+      if (!format) return finalFormat;
+      if (!finalFormat || (index === 2 && secondDigit === 1 && firstDigitFormat)) return `${finalFormat} ${format}`;
+      return `${finalFormat} ${and}${format}`;
+    }, '')
+    .trim();
 
   return `${formatsAppended}${tripletUnitFormat && formatsAppended ? ' ' : ''}${tripletUnitFormat}`;
 };
