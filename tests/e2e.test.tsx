@@ -15,7 +15,7 @@ describe('Tafqit test cases', () => {
     expect(tafqitValue.textContent).toEqual('');
   });
 
-  it('check format of negative numbers value', () => {
+  it('check format of negative numbers', () => {
     const { getByTestId } = render(<Tafqit>-20</Tafqit>);
     const tafqitValue = getByTestId('tafqit-value');
     expect(tafqitValue.textContent).toEqual('');
@@ -24,6 +24,6 @@ describe('Tafqit test cases', () => {
   it('check format of "90091212"', () => {
     const { getByTestId } = render(<Tafqit>90091212</Tafqit>);
     const tafqitValue = getByTestId('tafqit-value');
-    expect(tafqitValue.textContent).toEqual('فقط تسعون مليون وواحد وتسعون الف ومئتان واثنا وعشر  جنيه مصري لا غير');
+    expect(tafqitValue.textContent).toEqual('فقط تسعون مليون وواحد وتسعون الف ومئتان واثنا عشر جنيه مصري لا غير');
   });
 });

@@ -31,7 +31,13 @@ const getTafqitFormat = (num: string): string => {
     if (tripletOrder === 0) currencyFormat = getUnitFormat(tripletAmount, tripletOrder);
     else tripletUnitFormat = getUnitFormat(tripletAmount, tripletOrder);
 
-    const tripletFormat = getTripletFormat(tripletUnitFormat, firstDigitFormat, secondDigitFormat, thirdDigitFormat);
+    const tripletFormat = getTripletFormat(
+      tripletUnitFormat,
+      firstDigitFormat,
+      secondDigitFormat,
+      thirdDigitFormat,
+      secondDigit,
+    );
     if (tripletFormat) tafqitMap.unshift(tripletFormat);
   }
   return getFinalTafqitFormat(tafqitMap, currencyFormat);

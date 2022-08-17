@@ -70,12 +70,16 @@ export const getTripletFormat = (
   firstDigitFormat: string,
   secondDigitFormat: string,
   thirdDigitFormat: string,
+  secondDigit: number,
 ): string => {
-  const formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat]
-    .filter((format) => !!format)
-    .join(` ${and}`);
+  let formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat].reduce((finalFormat, format, index) => {
+    if (!format) return finalFormat;
+    if (!finalFormat || (index === 2 && secondDigit === 1)) return `${finalFormat} ${format}`;
+    return `${finalFormat} ${and}${format}`;
+  }, '');
+  formatsAppended = formatsAppended.trim();
 
-  return `${formatsAppended}${formatsAppended ? ' ' : ''}${tripletUnitFormat}`;
+  return `${formatsAppended}${tripletUnitFormat ? ' ' : ''}${tripletUnitFormat}`;
 };
 
 export const getFinalTafqitFormat = (tafqitMap: string[], currencyFormat: string): string =>
