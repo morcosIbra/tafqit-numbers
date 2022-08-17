@@ -59,7 +59,8 @@ export const getThirdDigitFormat = (digit: number): string => {
 };
 
 export const getUnitFormat = (tripletAmount: number, tripletOrder: number): string => {
-  if (tripletAmount >= 3 && tripletAmount <= 10) return tripletUnitMap[tripletOrder].plural;
+  const tensAmount = tripletAmount % 100;
+  if (tensAmount >= 3 && tensAmount <= 10) return tripletUnitMap[tripletOrder].plural;
   if (tripletAmount === 2) return tripletUnitMap[tripletOrder].muthana;
   if (tripletAmount === 0 && tripletOrder !== 0) return '';
   return tripletUnitMap[tripletOrder].default;
@@ -74,7 +75,7 @@ export const getTripletFormat = (
 ): string => {
   let formatsAppended = [thirdDigitFormat, firstDigitFormat, secondDigitFormat].reduce((finalFormat, format, index) => {
     if (!format) return finalFormat;
-    if (!finalFormat || (index === 2 && secondDigit === 1)) return `${finalFormat} ${format}`;
+    if (!finalFormat || (index === 2 && secondDigit === 1 && firstDigitFormat)) return `${finalFormat} ${format}`;
     return `${finalFormat} ${and}${format}`;
   }, '');
   formatsAppended = formatsAppended.trim();
