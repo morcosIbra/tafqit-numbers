@@ -39,6 +39,12 @@ describe('Tafqit test cases', () => {
     expect(tafqitValue.textContent).toEqual('فقط ثلاثمائة وعشرة الاف وخمسة جنيهات مصرية لا غير');
   });
 
+  it('check format of "2000000"', () => {
+    const { getByTestId } = render(<Tafqit>2000000</Tafqit>);
+    const tafqitValue = getByTestId('tafqit-value');
+    expect(tafqitValue.textContent).toEqual('فقط مليونان جنيه مصري لا غير');
+  });
+
   it('check format of "2209000"', () => {
     const { getByTestId } = render(<Tafqit>2209000</Tafqit>);
     const tafqitValue = getByTestId('tafqit-value');
